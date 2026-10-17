@@ -90,5 +90,97 @@
     "updated": "2026-10-17",
     "affiliateUrl": "https://jvz1.com/c/3447909/447867/",
     "accentColor": "#2f5bff"
+  },
+  {
+    "id": "unimaker-ai",
+    "name": "UniMaker AI",
+    "slug": "unimaker-ai",
+    "category": "AI Education Tools",
+    "shortDescription": "Cloud app that gives you 25+ AI professors and 30+ class categories to explore and set up your own online education business, with a commercial license and 5 vendor bonuses.",
+    "tags": [
+      "AI professors",
+      "Online courses",
+      "Commercial license",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/unimaker-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "UniMaker AI shown on a monitor, a laptop and two product boxes",
+    "pageUrl": "/unimaker-ai/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-18",
+    "affiliateUrl": "https://launchpadjv.com/o/580/28446",
+    "accentColor": "#7b2fe0"
+  },
+  {
+    "id": "whop-engine",
+    "name": "Whop Engine",
+    "slug": "whop-engine",
+    "category": "AI Membership Tools",
+    "shortDescription": "AI app that builds a paid membership business on your Whop account (offer, course, community posts, store visuals), launches it and opens it to Whop affiliates, with 4 vendor bonuses.",
+    "tags": [
+      "Whop memberships",
+      "AI course builder",
+      "Commercial license",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/whopengine-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "Whop Engine shown on a monitor, laptop, tablet, phone and product boxes",
+    "pageUrl": "/whop-engine/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-18",
+    "affiliateUrl": "https://launchpadjv.com/o/578/28446",
+    "accentColor": "#f2561d"
+  },
+  {
+    "id": "bookseries-ai",
+    "name": "BookSeries AI",
+    "slug": "bookseries-ai",
+    "category": "AI Book Publishing Tools",
+    "shortDescription": "AI app that turns one idea into a connected, full-length book series with covers, series bible and KDP-ready files, plus 3 AiReview bonuses.",
+    "tags": [
+      "Amazon KDP",
+      "Book series",
+      "3 bonuses",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/bookseriesai-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "BookSeries AI shown on a monitor, laptop, tablet, phone and a product box",
+    "pageUrl": "/bookseries-ai/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-18",
+    "affiliateUrl": "https://launchpadjv.com/o/562/28446",
+    "accentColor": "#7c3aed"
+  },
+  {
+    "id": "neura-ai",
+    "name": "Neura AI",
+    "slug": "neura-ai",
+    "category": "AI Productivity Tools",
+    "shortDescription": "Cloud dashboard that the vendor says puts seven AI models and an auto-routing engine behind one prompt box, with a commercial license and 7 vendor bonuses.",
+    "tags": [
+      "7 AI models",
+      "OpenClaw",
+      "Commercial license",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/neuraai-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "Neura AI shown on a monitor, laptop, tablet, phone and a product box",
+    "pageUrl": "/neura-ai/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-18",
+    "affiliateUrl": "https://launchpadjv.com/o/551/28446",
+    "accentColor": "#7c3aed"
   }
 ]
