@@ -182,5 +182,51 @@
     "updated": "2026-10-18",
     "affiliateUrl": "https://launchpadjv.com/o/551/28446",
     "accentColor": "#7c3aed"
+  },
+  {
+    "id": "gumetsy-ai",
+    "name": "GumEtsy AI",
+    "slug": "gumetsy-ai",
+    "category": "AI Digital Product Tools",
+    "shortDescription": "AI tool that the vendor says creates a digital product, cover and sales copy from one keyword and lists it to Etsy and Gumroad, with a commercial license and 6 vendor bonuses.",
+    "tags": [
+      "Etsy",
+      "Gumroad",
+      "Commercial license",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/gumetsyai-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "GumEtsy AI shown on a monitor, laptop, tablet, phone and product box with two cartoon shoppers",
+    "pageUrl": "/gumetsy-ai/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-18",
+    "affiliateUrl": "https://launchpadjv.com/o/571/28446",
+    "accentColor": "#c026d3"
+  },
+  {
+    "id": "grokai-studio",
+    "name": "GrokAI Studio",
+    "slug": "grokai-studio",
+    "category": "AI Content Tools",
+    "shortDescription": "Cloud dashboard that the vendor says gives access to Grok models for text, images, video and voice, with a commercial license and 5 vendor bonuses. Claims to check before buying.",
+    "tags": [
+      "Grok models",
+      "Image and video",
+      "Commercial license",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/grokaistudio-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "GrokAI Studio shown on a monitor, laptop and two product boxes",
+    "pageUrl": "/grokai-studio/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-18",
+    "affiliateUrl": "https://launchpadjv.com/o/568/28446",
+    "accentColor": "#ea580c"
   }
 ]
