@@ -1,0 +1,11 @@
+/* ShopEmpire page only: its own accent colour and small layout tweaks.
+   Shared styles are in affiliate-page.css. */
+:root{--accent:#c81e78;--accent-ink:#ffffff}
+.hero-img img{max-width:420px;width:100%;height:auto}
+.trust{max-width:274px}
+.badges{gap:26px;align-items:center;flex-wrap:wrap}
+.badges img{width:auto;height:118px;max-width:none}
+.badges img[src*="badge-14day"]{height:150px}
+.pricebox .amt{font-size:36px}
+/* vendor bonuses have no cover images, so the card is a single column */
+.bonus.no-img{grid-template-columns:1fr}

@@ -1,0 +1,94 @@
+/* Shared by the affiliate review pages (AiBizEngine, AIProspectGenie): CTA button styles,
+   price box, overview table, bonus cards and the bonus pop-up. Each product sets its own
+   accent and small tweaks in its own CSS file. Carried over from the original landing page. */
+
+h2.cta-link{text-align:center}
+.entry-content h2.cta-link{text-align:center;font-size:26px;margin:1.2em 0 .2em}
+h2.cta-link a{color:#1e90ff;text-decoration:none}
+h2.cta-link a:hover{color:#0b6fd0;text-decoration:underline}
+.cta-wrap{text-align:center;margin:18px 0 30px}
+.inside-article .cta-red,.inside-article .cta-yellow,.inside-article .cta-pill{text-decoration:none}
+.cta-red,.cta-yellow{display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;max-width:100%}
+.cta-red:hover,.cta-yellow:hover,.cta-pill:hover{text-decoration:none;filter:brightness(1.07)}
+.arr{width:86px;height:auto;flex:none}
+.arr-r .arr{transform:scaleX(-1)}
+.btn3d{display:block;background:linear-gradient(#e24a4a 0%,#b30000 48%,#780000 100%);color:#fff;font-family:Impact,"Arial Narrow","Arial Black",sans-serif;font-weight:400;font-size:27px;line-height:1.15;letter-spacing:.4px;padding:20px 34px;border-radius:12px;border:2px solid #5a0000;box-shadow:inset 0 3px 0 rgba(255,255,255,.38),0 12px 16px -8px rgba(120,0,0,.65);text-shadow:0 2px 2px rgba(0,0,0,.5)}
+.chev{width:62px;height:auto;flex:none}
+.chev-r .chev{transform:scaleX(-1)}
+.ybtn{position:relative;display:block;background:linear-gradient(#ffe766,#ffc400);color:#0c2a5a;font-family:Impact,"Arial Black",sans-serif;font-weight:400;font-size:32px;line-height:1.1;letter-spacing:.5px;padding:20px 40px;border-radius:12px;border:2px solid #d9a100;box-shadow:inset 0 3px 0 rgba(255,255,255,.55),0 10px 14px -8px rgba(150,100,0,.7)}
+.scrib{position:absolute;left:-8%;top:-22%;width:116%;height:144%;pointer-events:none;overflow:visible}
+.cta-pill{display:block;max-width:760px;margin:0 auto;background:linear-gradient(90deg,#ff2d00 0%,#ff7a00 55%,#ffa000 100%);border-radius:999px;padding:20px 34px;text-align:center;color:#1b1b1b;text-decoration:none}
+.inside-article a.cta-pill{color:#1b1b1b}
+.inside-article a.cta-pill:hover{color:#1b1b1b}
+.cta-pill strong{display:block;font-size:32px;line-height:1.2;font-weight:600}
+.cta-pill span{display:block;font-size:20px;margin-top:2px}
+
+.pricebox{border:2px solid #4B1FA8;border-radius:10px;padding:22px 26px;margin:0 0 1.6em;background:#faf8ff}
+.pricebox .amt{font-size:44px;font-weight:800;color:#4B1FA8;line-height:1.1}
+.pricebox p{margin:.3em 0 0;max-width:none}
+
+table.ov{border:1px solid #000;font-size:18px}
+table.ov th,table.ov td{border:1px solid #000;padding:12px 14px;font-weight:700}
+table.ov th{width:32%;background:#fff;color:#000}
+table.ov td{color:#ff6600}
+table.ov td.prod{color:#1a73e8}
+table.ov td a{color:#0000ee;text-decoration:underline}
+
+.coupon-wrap{text-align:center;margin:0 0 30px}
+.coupon-wrap p{margin:0 auto 10px;max-width:640px}
+.code{color:#1a73e8;font-size:1.15em;letter-spacing:.5px}
+.coupon{display:inline-flex;align-items:flex-start;border:4px dashed #222;padding:14px 18px 14px 34px;position:relative}
+.coupon .scis{position:absolute;left:-6px;top:-18px;font-size:34px;line-height:1;background:#fff;padding:0 2px}
+.coupon .cbox{background:#dc143c;color:#fff;font:800 38px/1 Arial,Helvetica,sans-serif;padding:20px 30px}
+
+/* bonuses */
+.bonus{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:center;margin:0 0 30px;padding:22px;border:1px solid #e1e3e6;border-radius:10px;background:#fafbfc}
+.bonus img{width:100%;height:auto;border-radius:6px;box-shadow:0 14px 26px -14px rgba(0,0,0,.55)}
+.bonus h3{margin-top:0}
+.bonus p:last-child{margin-bottom:0}
+
+/* pop-up form (opens only after a click on a buy button) */
+body.modal-open{overflow:hidden}
+.modal{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:16px;color:#222}
+.modal-backdrop{position:absolute;inset:0;background:rgba(14,24,48,.66)}
+.modal-card{position:relative;background:#fff;width:100%;max-width:600px;max-height:calc(100vh - 32px);overflow:auto;border-radius:12px;padding:34px 38px 28px;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.modal-x{position:absolute;right:10px;top:6px;background:none;border:0;font-size:34px;line-height:1;color:#555;cursor:pointer;padding:6px 10px}
+.modal-x:hover{color:#000}
+.modal-card h2{font-size:30px;line-height:1.2;margin:0 0 10px;color:#000;font-weight:800}
+.modal-card a{color:#1e73be}
+.modal-sub{font-size:18px;margin:0 auto 20px;max-width:none}
+.modal-card input[type=text],.modal-card input[type=email]{display:block;width:100%;padding:16px 18px;margin:0 0 14px;border:1px solid #8a8f98;border-radius:6px;font-size:20px;line-height:1.2;font-family:inherit;color:#111;background:#fff}
+.modal-card input::placeholder{color:#9aa0ab}
+.modal-card input:focus{outline:3px solid rgba(29,99,233,.35);border-color:#1d63e9}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+.sr{position:absolute;left:-9999px}
+.consent{display:flex;gap:10px;align-items:flex-start;text-align:left;font-size:14px;line-height:1.45;color:#333;margin:2px 0 14px}
+.consent input{margin-top:3px;flex:none;width:18px;height:18px}
+.form-err{margin:0 0 12px;color:#b00020;font-size:15px;font-weight:600;max-width:none}
+.m-btn{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;padding:17px 18px;border-radius:6px;font-family:inherit;font-weight:700;font-size:18px;letter-spacing:1.4px;text-transform:uppercase;line-height:1.3;cursor:pointer;text-decoration:none;text-align:center}
+.m-primary{background:#1d63e9;border:1px solid #1550c2;color:#fff}
+.modal-card a.m-primary,.modal-card a.m-primary:hover{color:#fff}
+.m-primary:hover{background:#1858d6;color:#fff;text-decoration:none}
+.m-secondary{background:#fff;border:2px solid #1d63e9;color:#1d63e9;margin-top:12px}
+.m-secondary:hover{background:#eef3ff}
+.m-btn .ico{flex:none;width:30px;height:30px;border-radius:50%;background:#fff;color:#1d63e9;display:inline-flex;align-items:center;justify-content:center;font-size:17px;letter-spacing:0}
+.modal-note{font-size:13px;color:#666;margin:14px auto 0;max-width:none}
+.modal-sub strong.val{color:#000;text-decoration:underline}
+.m-secondary[disabled],.m-primary[disabled]{opacity:.6;cursor:default}
+
+@media (max-width:820px){
+  h2.cta-link,.entry-content h2.cta-link{font-size:21px}
+  .arr{width:46px}.chev{width:34px}
+  .btn3d{font-size:19px;padding:14px 16px}
+  .ybtn{font-size:21px;padding:14px 18px}
+  .cta-pill{border-radius:36px;padding:16px 18px}
+  .cta-pill strong{font-size:23px}.cta-pill span{font-size:16px}
+  table.ov{font-size:16px}
+  .coupon .cbox{font-size:28px;padding:14px 20px}
+  .bonus{grid-template-columns:1fr;gap:16px;padding:16px}
+  .bonus img{max-width:260px;margin:0 auto}
+  .modal-card{padding:30px 18px 22px}
+  .modal-card h2{font-size:25px}
+  .modal-sub{font-size:16px}
+  .m-btn{font-size:15px;letter-spacing:.8px}
+}

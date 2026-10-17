@@ -1,0 +1,12 @@
+/* AIProspectGenie page only: its own accent colour and small layout tweaks.
+   Shared styles are in affiliate-page.css. */
+:root{--accent:#2f7bff;--accent-ink:#ffffff}
+.hero-img img{max-width:620px;width:100%;height:auto}
+.bonus{grid-template-columns:320px 1fr}
+.bonus img{box-shadow:none;border:1px solid #e1e3e6;background:#fff}
+.trust{max-width:274px}
+.badges{gap:26px;align-items:center;flex-wrap:wrap}
+.badges img{width:auto;height:118px;max-width:none}
+.badges img[src*="badge-14day"]{height:150px}
+.pricebox .amt{font-size:36px}
+@media (max-width:820px){.bonus{grid-template-columns:1fr}}

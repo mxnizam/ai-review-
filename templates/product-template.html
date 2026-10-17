@@ -1,0 +1,112 @@
+<!--
+  AIREVIEW PRODUCT PAGE TEMPLATE
+  ------------------------------
+  Copy this file to  /<slug>/index.html  (lowercase, hyphens only), then:
+    1. Replace every {{PLACEHOLDER}} with VERIFIED information. If you do not have it, delete the section.
+    2. Delete the sections the product does not need. Add or reorder sections freely.
+    3. Add the product to /data/products.json and /sitemap.xml.
+    4. Run  python tools/sync-layout.py  then  python tools/check-site.py
+  Rules: no invented prices, ratings, testimonials, guarantees, scarcity or customer numbers.
+  Use this product's own affiliate URL on every buy button. Never copy AiBizEngine text, images or links.
+  This file lives in /templates/ so it is not deployed and is skipped by the checks.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PRODUCT_NAME}} Review: {{UNIQUE_TITLE_KEYWORDS}}</title>
+<meta name="description" content="{{ONE_SENTENCE_DESCRIPTION_UNDER_160_CHARS}}">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://aireveiw.com/{{SLUG}}/">
+<meta property="og:site_name" content="AiReview">
+<meta property="og:title" content="{{SAME_AS_TITLE}}">
+<meta property="og:description" content="{{SAME_AS_DESCRIPTION}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aireveiw.com/{{SLUG}}/">
+<meta property="og:image" content="https://aireveiw.com/assets/images/{{SLUG}}-product.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{SAME_AS_TITLE}}">
+<meta name="twitter:description" content="{{SAME_AS_DESCRIPTION}}">
+<meta name="twitter:image" content="https://aireveiw.com/assets/images/{{SLUG}}-product.jpg">
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/global.css">
+<link rel="stylesheet" href="/assets/css/components.css">
+<!-- Optional: /assets/css/{{SLUG}}.css for this product's own accent colour and unique blocks.
+     Set the accent with  :root{--accent:#xxxxxx;--accent-ink:#ffffff}  -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://aireveiw.com/"},
+{"@type":"ListItem","position":2,"name":"All Products","item":"https://aireveiw.com/products/"},
+{"@type":"ListItem","position":3,"name":"{{PRODUCT_NAME}} Review","item":"https://aireveiw.com/{{SLUG}}/"}]}
+</script>
+<!-- Add Product / Review / AggregateRating schema ONLY if the visible page really has a genuine, sourced rating. -->
+</head>
+<body>
+<!-- layout:header:start -->
+<!-- layout:header:end -->
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol>
+<li><a href="/">Home</a></li><li><a href="/products/">All Products</a></li><li aria-current="page">{{PRODUCT_NAME}} Review</li>
+</ol></nav>
+
+<div class="site-content"><main id="content"><article class="inside-article">
+<h1 class="entry-title">{{PRODUCT_NAME}} Review</h1>
+<div class="entry-meta">Updated {{DATE}} by AiReview</div>
+
+<div class="entry-content">
+
+<!-- AFFILIATE DISCLOSURE (keep near the top) -->
+<p class="tnote"><strong>Disclosure:</strong> This is an independent review. If you buy through our links we may earn a commission at no extra cost to you. <a href="/affiliate-disclosure/">Read the full disclosure</a>.</p>
+
+<!-- PRODUCT HERO: image + headline + primary CTA -->
+<a class="hero-img" href="{{AFFILIATE_URL}}" target="_blank" rel="sponsored noopener"><img src="/assets/images/{{SLUG}}-product.jpg" width="{{W}}" height="{{H}}" alt="{{DESCRIPTIVE_ALT_TEXT}}"></a>
+<h2>{{HEADLINE}}</h2>
+<p>{{PRODUCT_SUMMARY_FROM_VERIFIED_INFO}}</p>
+<p><a class="btn btn-primary" href="{{AFFILIATE_URL}}" target="_blank" rel="sponsored noopener" aria-label="Visit the official {{PRODUCT_NAME}} page (affiliate link, opens in a new tab)">Visit the Official {{PRODUCT_NAME}} Page</a></p>
+
+<!-- OVERVIEW (optional quick-facts table) -->
+<h3 id="overview">{{PRODUCT_NAME}} Overview</h3>
+<table><tbody>
+<tr><th scope="row">Creator</th><td>{{VERIFIED}}</td></tr>
+<tr><th scope="row">Price</th><td>{{VERIFIED_PRICE}} (at the time of writing)</td></tr>
+</tbody></table>
+<p class="tnote">Details come from the vendor's public sales page and may change. Always confirm current terms on the official page.</p>
+
+<!-- KEY FEATURES -->
+<h3 id="features">Key Features</h3>
+<ul><li>{{FEATURE}}</li></ul>
+
+<!-- BENEFITS / WHO IT IS FOR / NOT FOR -->
+<h3>Who is it for?</h3>
+<ul><li>{{FIT}}</li></ul>
+<h3>Who is it probably not for?</h3>
+<ul><li>{{NOT_A_FIT}}</li></ul>
+
+<!-- HOW IT WORKS -->
+<h3 id="how">How does it work?</h3>
+<ol><li>{{STEP}}</li></ol>
+
+<!-- PRICING (only when verified; link to the official page for the final price) -->
+<h3 id="pricing">Price and what is included</h3>
+<p>{{VERIFIED_PRICING_AND_REFUND_TERMS}}</p>
+
+<!-- BONUSES (only if you genuinely provide them) -->
+<!-- PROS AND CONS (only if adequately researched) -->
+<!-- COMPARISON (only when relevant) -->
+
+<!-- FAQ -->
+<h3 id="faq">Frequently Asked Questions</h3>
+<details><summary>{{QUESTION}}</summary><p>{{ANSWER}}</p></details>
+
+<!-- FINAL CTA -->
+<p class="center"><a class="btn btn-primary" href="{{AFFILIATE_URL}}" target="_blank" rel="sponsored noopener">See the Current Price on the Official Page</a></p>
+</div>
+</article></main></div>
+
+<!-- layout:footer:start -->
+<!-- layout:footer:end -->
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

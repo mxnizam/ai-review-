@@ -1,0 +1,94 @@
+[
+  {
+    "id": "aibizengine",
+    "name": "AiBizEngine",
+    "slug": "ai-biz-engine",
+    "category": "AI Tools",
+    "shortDescription": "AI-powered business builder that drafts digital products, brand assets, a sales page, funnel pages, emails and marketplace-ready listings from a niche or keyword, with hosting built in.",
+    "tags": [
+      "AI business builder",
+      "Sales & funnel pages",
+      "Built-in hosting",
+      "KDP book builder"
+    ],
+    "image": "/assets/images/aibizengine-product.jpg",
+    "imageWidth": 1400,
+    "imageHeight": 693,
+    "imageAlt": "AiBizEngine product box and dashboard preview shown on desktop, laptop, tablet and phone screens",
+    "pageUrl": "/ai-biz-engine/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-15",
+    "affiliateUrl": "https://jvz5.com/c/3447909/452589/",
+    "accentColor": "#7B3FE4"
+  },
+  {
+    "id": "ai-prospect-genie",
+    "name": "AIProspectGenie",
+    "slug": "ai-prospect-genie",
+    "category": "AI Tools",
+    "shortDescription": "AI-powered prospecting system that helps you find businesses, analyse potential service opportunities and draft personalised outreach emails.",
+    "tags": [
+      "Prospect finder",
+      "AI business analysis",
+      "Personalised outreach",
+      "14-day refund (vendor)"
+    ],
+    "image": "/assets/images/aiprospectgenie-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "AIProspectGenie product box and laptop dashboard",
+    "pageUrl": "/ai-prospect-genie/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-17",
+    "affiliateUrl": "https://jvz9.com/c/3447909/454165/",
+    "accentColor": "#2f7bff"
+  },
+  {
+    "id": "shop-empire",
+    "name": "ShopEmpire",
+    "slug": "shop-empire",
+    "category": "AI Tools",
+    "shortDescription": "Faceless AI product-video tool that finds trending marketplace products, builds a video from the seller's photo and schedules it to five social platforms.",
+    "tags": [
+      "Faceless AI video",
+      "TikTok Shop, Amazon, eBay",
+      "5-platform publisher",
+      "Commercial license"
+    ],
+    "image": "/assets/images/shopempire-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "ShopEmpire product box with social media icons and a 14-day money back guarantee seal",
+    "pageUrl": "/shop-empire/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-17",
+    "affiliateUrl": "https://jvz1.com/c/3447909/453155/",
+    "accentColor": "#c81e78"
+  },
+  {
+    "id": "clickdesigns-x",
+    "name": "ClickDesigns X",
+    "slug": "clickdesigns-x",
+    "category": "Design Tools",
+    "shortDescription": "Browser-based design tool with templates and 1-click MagicWrap that turns flat designs into 3D mockups, bundles and graphics for pages, ads and social posts.",
+    "tags": [
+      "3D mockups",
+      "Design templates",
+      "Commercial license",
+      "30-day refund (vendor)"
+    ],
+    "image": "/assets/images/clickdesigns-card.jpg",
+    "imageWidth": 1100,
+    "imageHeight": 550,
+    "imageAlt": "ClickDesigns X dashboard on a monitor with product box and sample designs",
+    "pageUrl": "/clickdesigns-x/",
+    "status": "published",
+    "featured": true,
+    "updated": "2026-10-17",
+    "affiliateUrl": "https://jvz1.com/c/3447909/447867/",
+    "accentColor": "#2f5bff"
+  }
+]
