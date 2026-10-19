@@ -12,7 +12,7 @@
      offer are sent there as JSON, which creates the contact in systeme.io.
      Leave empty and nothing is saved (visitors are still redirected).
   ------------------------------------------------------------------ */
-  var LEAD_ENDPOINT = "";
+  var LEAD_ENDPOINT = "https://aireview.mohammednizamuddin78654.workers.dev";
 
 
   /* ---------------- Bonus pop-up (opens only when a buy button is clicked) ---------------- */
