@@ -94,7 +94,9 @@
   // Option 2: continue with email -> save the lead in systeme.io, then redirect to the affiliate link
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (form.website.value) return; // honeypot
+    // Honeypot: only bots fill this hidden field. Never leave a visitor stuck: skip saving, still send them on.
+    var trap = form.elements['hp_check'];
+    if (trap && trap.value) { goToOffer(pending); return; }
     var name = form.fname.value.trim(), email = form.email.value.trim();
     var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if (!name) { errBox.textContent = 'Please enter your first name.'; errBox.hidden = false; form.fname.focus(); return; }
