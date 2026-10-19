@@ -342,5 +342,33 @@
 </div>
 <!-- layout:footer:end -->
 <script src="/assets/js/main.js"></script>
+<div class="modal" id="bonus-modal" data-product="Neura AI" hidden>
+<div class="modal-backdrop" data-close="1"></div>
+<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<button class="modal-x" type="button" data-close="1" aria-label="Close">&times;</button>
+<div id="modal-form-view">
+<h2 id="modal-title">Want Neura AI Updates?</h2>
+<p class="modal-sub">Enter your name and best email and we'll email you if the price, bonuses or terms change. Or skip this step and go straight to the official page.</p>
+<form id="lead-form" novalidate>
+<label class="sr" for="lead-name">First name</label>
+<input id="lead-name" name="fname" type="text" placeholder="First Name" autocomplete="given-name" required>
+<label class="sr" for="lead-email">Email</label>
+<input id="lead-email" name="email" type="email" placeholder="Email ID" autocomplete="email" required>
+<input class="hp" name="hp_check" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+<label class="consent"><input id="lead-consent" name="consent" type="checkbox" required> <span>I agree to receive updates and related emails from AiReview. I can opt out at any time. See the <a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+<p class="form-err" id="form-err" role="alert" hidden></p>
+<button class="m-btn m-primary" type="submit"><span class="ico" aria-hidden="true">&#10140;</span><span>Continue With Email &amp; Get Updates</span></button>
+</form>
+<button class="m-btn m-secondary" id="skip-btn" type="button">Continue Without Email</button>
+<p class="modal-note">Either choice takes you to the official Neura AI page. The updates come from AiReview, not from the vendor.</p>
+</div>
+<div id="modal-thanks-view" hidden>
+<h2>Thanks<span id="thanks-name"></span>!</h2>
+<p class="modal-sub">Taking you to the official Neura AI page now.</p>
+<a class="m-btn m-primary" id="thanks-link" href="#" rel="sponsored noopener"><span class="ico" aria-hidden="true">&#10140;</span><span>Click Here If You Are Not Redirected</span></a>
+</div>
+</div>
+</div>
+<script src="/assets/js/bonus-popup.js?v=4"></script>
 </body>
 </html>

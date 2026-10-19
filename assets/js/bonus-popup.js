@@ -102,7 +102,7 @@
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!name) { errBox.textContent = 'Please enter your first name.'; errBox.hidden = false; el['fname'].focus(); return; }
       if (!valid) { errBox.textContent = 'Please enter a valid email address.'; errBox.hidden = false; el['email'].focus(); return; }
-      if (!el['consent'].checked) { errBox.textContent = 'Please tick the box to agree, or choose "Continue Without Bonuses".'; errBox.hidden = false; el['consent'].focus(); return; }
+      if (!el['consent'].checked) { errBox.textContent = 'Please tick the box to agree, or skip this step.'; errBox.hidden = false; el['consent'].focus(); return; }
       errBox.hidden = true;
       var target = pending;
       thanksLink.href = target;
