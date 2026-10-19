@@ -10,6 +10,7 @@
  *   TAG_NAME         (Text, optional)    fallback tag when the page sends no product name (default "Bonus Lead")
  *   ALLOWED_PRODUCTS (Text, optional)    e.g. "AiBizEngine,AIProspectGenie"; only these product names may create tags
  *   ALLOWED_ORIGIN   (Text, optional)    your site, e.g. https://yourdomain.com  (default: any)
+ *   DEBUG            (Text, optional)    set to 1 only while troubleshooting; adds status codes to the reply
  */
 const API = 'https://api.systeme.io/api';
 
@@ -32,6 +33,7 @@ export default {
 
     const headers = { 'X-API-Key': env.SYSTEME_API_KEY, 'Content-Type': 'application/json', 'Accept': 'application/json' };
     let contactId = null;
+    const dbg = {};   // status codes only (no secrets) so a failed save can be diagnosed
 
     try {
       // 1) create the contact
@@ -39,12 +41,15 @@ export default {
         method: 'POST', headers,
         body: JSON.stringify({ email, locale: 'en', fields: name ? [{ slug: 'first_name', value: name }] : [] })
       });
+      dbg.create = create.status;
       if (create.ok) {
         const c = await create.json();
         contactId = c && c.id;
       } else {
+        try { dbg.createError = (await create.text()).slice(0, 300); } catch (x) {}
         // already exists? look it up so we can still tag it
         const found = await fetch(API + '/contacts?email=' + encodeURIComponent(email), { headers });
+        dbg.lookup = found.status;
         if (found.ok) {
           const d = await found.json();
           contactId = d && d.items && d.items[0] && d.items[0].id;
@@ -69,11 +74,16 @@ export default {
           const mk = await fetch(API + '/tags', { method: 'POST', headers, body: JSON.stringify({ name: tagName }) });
           if (mk.ok) { const t = await mk.json(); tagId = t && t.id; }
         }
-        if (tagId) await fetch(API + '/contacts/' + contactId + '/tags', { method: 'POST', headers, body: JSON.stringify({ tagId }) });
+        dbg.tag = tagName;
+        if (tagId) { const tr = await fetch(API + '/contacts/' + contactId + '/tags', { method: 'POST', headers, body: JSON.stringify({ tagId }) }); dbg.tagStatus = tr.status; }
       }
-    } catch (e) { /* never block the visitor */ }
+    } catch (e) { dbg.exception = String(e && e.message || e).slice(0, 200); /* never block the visitor */ }
 
-    return json({ ok: true, saved: !!contactId }, 200, cors);
+    // Diagnostics are off by default (they would reveal whether an email is already in your list).
+    // To debug, add a Text variable DEBUG = 1 in the Worker settings, then remove it again.
+    const out = { ok: true, saved: !!contactId };
+    if (env.DEBUG === '1') out.debug = dbg;
+    return json(out, 200, cors);
   }
 };
 
