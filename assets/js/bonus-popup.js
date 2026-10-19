@@ -94,19 +94,25 @@
   // Option 2: continue with email -> save the lead in systeme.io, then redirect to the affiliate link
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    // Honeypot: only bots fill this hidden field. Never leave a visitor stuck: skip saving, still send them on.
-    var trap = form.elements['hp_check'];
-    if (trap && trap.value) { goToOffer(pending); return; }
-    var name = form.fname.value.trim(), email = form.email.value.trim();
-    var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!name) { errBox.textContent = 'Please enter your first name.'; errBox.hidden = false; form.fname.focus(); return; }
-    if (!valid) { errBox.textContent = 'Please enter a valid email address.'; errBox.hidden = false; form.email.focus(); return; }
-    if (!form.consent.checked) { errBox.textContent = 'Please tick the box to agree, or choose "Continue Without Bonuses".'; errBox.hidden = false; form.consent.focus(); return; }
-    errBox.hidden = true;
-    var target = pending;
-    thanksLink.href = target;
-    formView.hidden = true; thanksView.hidden = false;
-    sendLead({ name: name, email: email, offer: offerOf(target), consent: 'yes', page: window.location.href, source: 'bonus-popup', product: modal.getAttribute('data-product') || '' })
-      .then(function () { goToOffer(target); });
+    try {
+      var el = form.elements;
+      // Honeypot: only bots fill this hidden field. Never leave a visitor stuck: skip saving, still send them on.
+      if (el['hp_check'] && el['hp_check'].value) { goToOffer(pending); return; }
+      var name = (el['fname'] ? el['fname'].value : '').trim(), email = (el['email'] ? el['email'].value : '').trim();
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!name) { errBox.textContent = 'Please enter your first name.'; errBox.hidden = false; el['fname'].focus(); return; }
+      if (!valid) { errBox.textContent = 'Please enter a valid email address.'; errBox.hidden = false; el['email'].focus(); return; }
+      if (!el['consent'].checked) { errBox.textContent = 'Please tick the box to agree, or choose "Continue Without Bonuses".'; errBox.hidden = false; el['consent'].focus(); return; }
+      errBox.hidden = true;
+      var target = pending;
+      thanksLink.href = target;
+      formView.hidden = true; thanksView.hidden = false;
+      sendLead({ name: name, email: email, offer: offerOf(target), consent: 'yes', page: window.location.href, source: 'bonus-popup', product: modal.getAttribute('data-product') || '' })
+        .then(function () { goToOffer(target); });
+    } catch (err) {
+      // Safety net: if anything unexpected fails, never leave the visitor stuck on the pop-up.
+      if (window.console) console.error('bonus pop-up error', err);
+      goToOffer(pending);
+    }
   });
 })();
