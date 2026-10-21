@@ -24,20 +24,22 @@
   var pending = '', lastFocus = null;
   // Test mode: add ?leaddebug=1 to the page address. The pop-up then shows what happened instead of redirecting.
   var DEBUG_MODE = /[?&]leaddebug=1/.test(window.location.search);
+  var dbgBox = null;
   function dbgLine(text) {
     if (!DEBUG_MODE) return;
-    var box = d.getElementById('lead-debug');
-    if (!box) {
-      box = d.createElement('pre'); box.id = 'lead-debug';
-      box.style.cssText = 'white-space:pre-wrap;word-break:break-word;background:#f3f4f6;color:#111;padding:10px;border-radius:6px;font-size:13px;text-align:left;margin:10px 0';
-      (thanksView || modal).appendChild(box);
+    if (!dbgBox) {
+      dbgBox = d.createElement('pre'); dbgBox.id = 'lead-debug';
+      dbgBox.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;max-height:45vh;overflow:auto;z-index:99999;white-space:pre-wrap;word-break:break-word;background:#111;color:#7CFC9A;padding:10px;border-radius:8px;font:13px/1.4 monospace;text-align:left;margin:0';
+      d.body.appendChild(dbgBox);
     }
-    box.textContent = (box.textContent ? box.textContent + '\n' : '') + text;
+    dbgBox.textContent += (dbgBox.textContent ? '\n' : '') + text;
   }
+  dbgLine('TEST MODE ON. Script v8 loaded. Product: ' + (modal && modal.getAttribute('data-product')));
 
   function offerOf(href) { return href.indexOf('453697') > -1 ? 'bundle' : 'front-end'; }
 
   function openModal(href) {
+    dbgLine('Pop-up opened. Buy link: ' + href);
     pending = href;
     lastFocus = d.activeElement;
     form.reset();
@@ -107,6 +109,10 @@
     goToOffer(pending);
   });
 
+  var emailBtn = form.querySelector('button[type=submit]');
+  if (emailBtn) emailBtn.addEventListener('click', function () { dbgLine('Clicked: Continue With Email button'); });
+  form.addEventListener('submit', function () { dbgLine('Form submit event fired'); }, true);
+
   // Option 2: continue with email -> save the lead in systeme.io, then redirect to the affiliate link
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -116,9 +122,9 @@
       if (el['hp_check'] && el['hp_check'].value) { goToOffer(pending); return; }
       var name = (el['fname'] ? el['fname'].value : '').trim(), email = (el['email'] ? el['email'].value : '').trim();
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!name) { errBox.textContent = 'Please enter your first name.'; errBox.hidden = false; el['fname'].focus(); return; }
-      if (!valid) { errBox.textContent = 'Please enter a valid email address.'; errBox.hidden = false; el['email'].focus(); return; }
-      if (!el['consent'].checked) { errBox.textContent = 'Please tick the box to agree, or skip this step.'; errBox.hidden = false; el['consent'].focus(); return; }
+      if (!name) { errBox.textContent = 'Please enter your first name.'; dbgLine('Stopped: first name empty'); errBox.hidden = false; el['fname'].focus(); return; }
+      if (!valid) { errBox.textContent = 'Please enter a valid email address.'; dbgLine('Stopped: email not valid'); errBox.hidden = false; el['email'].focus(); return; }
+      if (!el['consent'].checked) { errBox.textContent = 'Please tick the box to agree, or skip this step.'; dbgLine('Stopped: consent box not ticked'); errBox.hidden = false; el['consent'].focus(); return; }
       errBox.hidden = true;
       var target = pending;
       thanksLink.href = target;
@@ -138,7 +144,7 @@
         });
     } catch (err) {
       // Safety net: if anything unexpected fails, never leave the visitor stuck on the pop-up.
-      if (window.console) console.error('bonus pop-up error', err);
+      if (window.console) console.error('bonus pop-up error', err); dbgLine('ERROR in form code: ' + err);
       goToOffer(pending);
     }
   });
