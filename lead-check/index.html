@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lead check</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Private test page for the email sign-up connection. Not for visitors.">
+<style>
+body{font:16px/1.5 system-ui,Segoe UI,Arial,sans-serif;max-width:680px;margin:30px auto;padding:0 16px;color:#111}
+label{display:block;margin:12px 0 4px;font-weight:600}
+input,select{width:100%;padding:10px;font-size:16px;border:1px solid #999;border-radius:6px}
+button{margin:14px 8px 0 0;padding:10px 16px;font-size:16px;border:0;border-radius:6px;background:#2563eb;color:#fff;cursor:pointer}
+pre{background:#f3f4f6;padding:12px;border-radius:6px;white-space:pre-wrap;word-break:break-word}
+.ok{color:#047857}.bad{color:#b91c1c}
+</style>
+</head>
+<body>
+<h1>Lead check (private test page)</h1>
+<p>Sends one test lead to the same Worker the pop-up uses, and shows exactly what your browser gets back. Use an email that is not already in systeme.io.</p>
+<label for="n">First name</label><input id="n" value="CheckTest">
+<label for="e">Email</label><input id="e" type="email" placeholder="you+test1@gmail.com">
+<label for="p">Product</label>
+<select id="p"><option>BookSeries AI</option><option>UniMaker AI</option><option>AIProspectGenie</option><option>AiBizEngine</option><option>ShopEmpire</option><option>ClickDesigns X</option><option>Whop Engine</option><option>Neura AI</option><option>GumEtsy AI</option><option>GrokAI Studio</option></select>
+<button id="b1">Test 1: send and read the answer</button>
+<button id="b2">Test 2: send like the pop-up (beacon)</button>
+<pre id="out">Waiting...</pre>
+<script>
+var URL_ = "https://aireview.mohammednizamuddin78654.workers.dev";
+var out = document.getElementById('out');
+function data() { return JSON.stringify({ name: document.getElementById('n').value, email: document.getElementById('e').value.trim(), consent: 'yes', product: document.getElementById('p').value, source: 'lead-check' }); }
+function log(t, cls) { out.innerHTML = '<span class="' + (cls || '') + '">' + t.replace(/</g, '&lt;') + '</span>'; }
+document.getElementById('b1').onclick = function () {
+  log('Sending...');
+  var t0 = Date.now();
+  fetch(URL_, { method: 'POST', body: data() }).then(function (r) {
+    return r.text().then(function (t) { log('Your browser reached the Worker.\nHTTP status: ' + r.status + '\nTime: ' + (Date.now() - t0) + ' ms\nAnswer: ' + t, r.ok ? 'ok' : 'bad'); });
+  }).catch(function (e) { log('Your browser could NOT reach the Worker.\nError: ' + e + '\n\nSomething on your side is blocking requests to workers.dev (an extension, antivirus, DNS or network filter).', 'bad'); });
+};
+document.getElementById('b2').onclick = function () {
+  var sent = false;
+  try { sent = navigator.sendBeacon(URL_, data()); } catch (e) { log('sendBeacon error: ' + e, 'bad'); return; }
+  log('sendBeacon accepted by your browser: ' + sent + '\n(That only means the browser queued it. Check systeme.io Contacts in about 10 seconds.)', sent ? 'ok' : 'bad');
+};
+</script>
+</body>
+</html>
