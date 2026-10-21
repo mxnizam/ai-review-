@@ -34,7 +34,7 @@
     }
     dbgBox.textContent += (dbgBox.textContent ? '\n' : '') + text;
   }
-  dbgLine('TEST MODE ON. Script v8 loaded. Product: ' + (modal && modal.getAttribute('data-product')));
+  dbgLine('TEST MODE ON. Script v9 loaded. Product: ' + (modal && modal.getAttribute('data-product')));
 
   function offerOf(href) { return href.indexOf('453697') > -1 ? 'bundle' : 'front-end'; }
 
@@ -118,8 +118,8 @@
     e.preventDefault();
     try {
       var el = form.elements;
-      // Honeypot: only bots fill this hidden field. Never leave a visitor stuck: skip saving, still send them on.
-      if (el['hp_check'] && el['hp_check'].value) { goToOffer(pending); return; }
+      // (No hidden spam-trap field any more: browsers and extensions can auto-fill it and silently block real visitors.)
+      if (DEBUG_MODE) { var inv = []; for (var i = 0; i < el.length; i++) { if (el[i].name) inv.push(el[i].name + (el[i].value ? '=filled' : '=empty')); } dbgLine('Fields: ' + inv.join(', ')); }
       var name = (el['fname'] ? el['fname'].value : '').trim(), email = (el['email'] ? el['email'].value : '').trim();
       var valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!name) { errBox.textContent = 'Please enter your first name.'; dbgLine('Stopped: first name empty'); errBox.hidden = false; el['fname'].focus(); return; }
