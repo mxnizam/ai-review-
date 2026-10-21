@@ -42,22 +42,19 @@
   }
   function goToOffer(href) { window.location.href = href; }
   function sendLead(data) {
-    // Resolves when the lead request finishes or after 2 seconds, whichever comes first,
-    // so the visitor is never held up and is always redirected.
+    // Fire-and-forget: sendBeacon is built to survive the page being left, and it sends the JSON as
+    // plain text, so the browser needs no extra "pre-check" request (which privacy extensions can block).
+    // The Worker finishes saving in the background, so we only wait a moment before redirecting.
     if (!LEAD_ENDPOINT) {
-      if (window.console) console.warn('LEAD_ENDPOINT is empty in assets/main.js: the email was not saved.');
+      if (window.console) console.warn('LEAD_ENDPOINT is empty in assets/js/bonus-popup.js: the email was not saved.');
       return Promise.resolve();
     }
-    var req;
-    try {
-      req = fetch(LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        keepalive: true
-      }).catch(function () {});
-    } catch (e) { req = Promise.resolve(); }
-    return Promise.race([req, new Promise(function (r) { setTimeout(r, 2000); })]);
+    var payload = JSON.stringify(data), sent = false;
+    try { if (navigator.sendBeacon) sent = navigator.sendBeacon(LEAD_ENDPOINT, payload); } catch (e) { sent = false; }
+    if (!sent) {
+      try { fetch(LEAD_ENDPOINT, { method: 'POST', body: payload, keepalive: true }).catch(function () {}); } catch (e) {}
+    }
+    return new Promise(function (r) { setTimeout(r, 600); });
   }
 
   // Intercept plain clicks on buy links. Modified clicks (new tab etc.) go straight through.
