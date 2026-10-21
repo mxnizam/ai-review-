@@ -22,6 +22,18 @@
   var form = d.getElementById('lead-form'), errBox = d.getElementById('form-err');
   var skipBtn = d.getElementById('skip-btn'), thanksLink = d.getElementById('thanks-link'), thanksName = d.getElementById('thanks-name');
   var pending = '', lastFocus = null;
+  // Test mode: add ?leaddebug=1 to the page address. The pop-up then shows what happened instead of redirecting.
+  var DEBUG_MODE = /[?&]leaddebug=1/.test(window.location.search);
+  function dbgLine(text) {
+    if (!DEBUG_MODE) return;
+    var box = d.getElementById('lead-debug');
+    if (!box) {
+      box = d.createElement('pre'); box.id = 'lead-debug';
+      box.style.cssText = 'white-space:pre-wrap;word-break:break-word;background:#f3f4f6;color:#111;padding:10px;border-radius:6px;font-size:13px;text-align:left;margin:10px 0';
+      (thanksView || modal).appendChild(box);
+    }
+    box.textContent = (box.textContent ? box.textContent + '\n' : '') + text;
+  }
 
   function offerOf(href) { return href.indexOf('453697') > -1 ? 'bundle' : 'front-end'; }
 
@@ -47,18 +59,20 @@
     //    fall back to sendBeacon. The Worker saves in the background, so we never wait long before redirecting.
     if (!LEAD_ENDPOINT) {
       if (window.console) console.warn('LEAD_ENDPOINT is empty in assets/js/bonus-popup.js: the email was not saved.');
-      return Promise.resolve();
+      return Promise.resolve({ via: 'none', error: 'LEAD_ENDPOINT is empty' });
     }
-    var payload = JSON.stringify(data);
+    var payload = JSON.stringify(data), t0 = Date.now();
     function beacon() { try { return !!(navigator.sendBeacon && navigator.sendBeacon(LEAD_ENDPOINT, payload)); } catch (e) { return false; } }
     var viaFetch;
     try {
       viaFetch = fetch(LEAD_ENDPOINT, { method: 'POST', body: payload, keepalive: true })
-        .then(function () { return true; }, function () { return false; });
-    } catch (e) { viaFetch = Promise.resolve(false); }
-    var limit = new Promise(function (r) { setTimeout(function () { r('slow'); }, 1500); });
-    return Promise.race([viaFetch, limit]).then(function (ok) {
-      if (ok === false) beacon();          // fetch was blocked: try the beacon instead
+        .then(function (r) { return { via: 'fetch', ok: r.ok, status: r.status, ms: Date.now() - t0 }; },
+              function (e) { return { via: 'fetch', ok: false, error: String(e), ms: Date.now() - t0 }; });
+    } catch (e) { viaFetch = Promise.resolve({ via: 'fetch', ok: false, error: String(e) }); }
+    var limit = new Promise(function (r) { setTimeout(function () { r({ via: 'fetch', ok: null, slow: true, ms: 1500 }); }, 1500); });
+    return Promise.race([viaFetch, limit]).then(function (res) {
+      if (res.ok === false) { res.beaconTried = true; res.beaconAccepted = beacon(); }   // fetch was blocked: try the beacon
+      return res;
     });
   }
 
@@ -109,8 +123,19 @@
       var target = pending;
       thanksLink.href = target;
       formView.hidden = true; thanksView.hidden = false;
+      dbgLine('Form submitted. Sending ' + email + ' for product "' + (modal.getAttribute('data-product') || '') + '"...');
       sendLead({ name: name, email: email, offer: offerOf(target), consent: 'yes', page: window.location.href, source: 'bonus-popup', product: modal.getAttribute('data-product') || '' })
-        .then(function () { goToOffer(target); });
+        .then(function (res) {
+          if (DEBUG_MODE) {
+            dbgLine('RESULT: ' + JSON.stringify(res) + '\n' +
+              (res.ok ? 'Your browser reached the Worker. Check systeme.io Contacts in about 30 seconds.'
+               : res.slow ? 'No answer within 1.5 s (a slow connection, or the request is being held up).'
+               : 'Your browser could NOT reach the Worker. Something on your side is blocking requests to workers.dev.') +
+              '\nDebug mode: not redirecting. Use the button below to continue.');
+            return;
+          }
+          goToOffer(target);
+        });
     } catch (err) {
       // Safety net: if anything unexpected fails, never leave the visitor stuck on the pop-up.
       if (window.console) console.error('bonus pop-up error', err);
