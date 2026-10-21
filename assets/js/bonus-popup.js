@@ -42,19 +42,24 @@
   }
   function goToOffer(href) { window.location.href = href; }
   function sendLead(data) {
-    // Fire-and-forget: sendBeacon is built to survive the page being left, and it sends the JSON as
-    // plain text, so the browser needs no extra "pre-check" request (which privacy extensions can block).
-    // The Worker finishes saving in the background, so we only wait a moment before redirecting.
+    // 1) Normal fetch with keepalive (the browser finishes it even if the page is left). It is sent as plain text,
+    //    so no extra "pre-check" request is needed. 2) If that is blocked (some privacy extensions block requests),
+    //    fall back to sendBeacon. The Worker saves in the background, so we never wait long before redirecting.
     if (!LEAD_ENDPOINT) {
       if (window.console) console.warn('LEAD_ENDPOINT is empty in assets/js/bonus-popup.js: the email was not saved.');
       return Promise.resolve();
     }
-    var payload = JSON.stringify(data), sent = false;
-    try { if (navigator.sendBeacon) sent = navigator.sendBeacon(LEAD_ENDPOINT, payload); } catch (e) { sent = false; }
-    if (!sent) {
-      try { fetch(LEAD_ENDPOINT, { method: 'POST', body: payload, keepalive: true }).catch(function () {}); } catch (e) {}
-    }
-    return new Promise(function (r) { setTimeout(r, 600); });
+    var payload = JSON.stringify(data);
+    function beacon() { try { return !!(navigator.sendBeacon && navigator.sendBeacon(LEAD_ENDPOINT, payload)); } catch (e) { return false; } }
+    var viaFetch;
+    try {
+      viaFetch = fetch(LEAD_ENDPOINT, { method: 'POST', body: payload, keepalive: true })
+        .then(function () { return true; }, function () { return false; });
+    } catch (e) { viaFetch = Promise.resolve(false); }
+    var limit = new Promise(function (r) { setTimeout(function () { r('slow'); }, 1500); });
+    return Promise.race([viaFetch, limit]).then(function (ok) {
+      if (ok === false) beacon();          // fetch was blocked: try the beacon instead
+    });
   }
 
   // Intercept plain clicks on buy links. Modified clicks (new tab etc.) go straight through.
