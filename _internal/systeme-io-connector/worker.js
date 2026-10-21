@@ -81,19 +81,25 @@ async function saveLead(env, email, name, product) {
     if (contactId && tagName) {
       let tagId = null;
       const list = await fetch(API + '/tags?limit=100', { headers });
+      dbg.tagList = list.status;
       if (list.ok) {
         const d = await list.json();
+        dbg.tagsInAccount = (d.items || []).map(function (t) { return t.name; });
         const hit = (d.items || []).find(function (t) { return t.name === tagName; });
         if (hit) tagId = hit.id;
       }
+      dbg.tagFound = !!tagId;
       if (!tagId) {
         const mk = await fetch(API + '/tags', { method: 'POST', headers, body: JSON.stringify({ name: tagName }) });
+        dbg.tagCreate = mk.status;
         if (mk.ok) { const t = await mk.json(); tagId = t && t.id; }
+        else { try { dbg.tagCreateError = (await mk.text()).slice(0, 300); } catch (x) {} }
       }
       dbg.tag = tagName;
       if (tagId) {
         const tr = await fetch(API + '/contacts/' + contactId + '/tags', { method: 'POST', headers, body: JSON.stringify({ tagId }) });
         dbg.tagStatus = tr.status;
+        if (!tr.ok) { try { dbg.tagAssignError = (await tr.text()).slice(0, 300); } catch (x) {} }
       }
     }
   } catch (e) { dbg.exception = String(e && e.message || e).slice(0, 200); }
